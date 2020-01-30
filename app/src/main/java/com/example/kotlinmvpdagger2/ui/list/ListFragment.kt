@@ -3,27 +3,26 @@ package com.example.kotlinmvpdagger2.ui.list
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.kotlinmvpdagger2.R
 import com.example.kotlinmvpdagger2.di.component.DaggerFragmentComponent
 import com.example.kotlinmvpdagger2.di.module.FragmentModule
 import com.example.kotlinmvpdagger2.models.DetailViewModel
 import com.example.kotlinmvpdagger2.models.Post
-import kotlinx.android.synthetic.main.fragment_about.*
+import com.example.kotlinmvpdagger2.util.SwipeToDelete
 import kotlinx.android.synthetic.main.fragment_list2.*
 import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class ListFragment: Fragment(), ListContract.View, ListAdapter.onItemClickListener {
+class ListFragment : Fragment(), ListContract.View, ListAdapter.onItemClickListener {
 
     @Inject
     lateinit var presenter: ListContract.Presenter
@@ -44,7 +43,7 @@ class ListFragment: Fragment(), ListContract.View, ListAdapter.onItemClickListen
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater!!.inflate(R.layout.fragment_list2, container, false)
+        rootView = inflater.inflate(R.layout.fragment_list2, container, false)
         return rootView
     }
 
@@ -74,13 +73,13 @@ class ListFragment: Fragment(), ListContract.View, ListAdapter.onItemClickListen
 
     override fun loadDataSuccess(list: List<Post>) {
         val adapter = ListAdapter(this.activity!!, list.toMutableList(), this)
-        recyclerView!!.setLayoutManager(LinearLayoutManager(activity))
-        recyclerView!!.setAdapter(adapter)
+        recyclerView!!.layoutManager = LinearLayoutManager(activity)
+        recyclerView!!.adapter = adapter
 
-        val swipeHandler = object : SwipeToDelete(activity) {
+        val swipeHandler = object : SwipeToDelete(this.activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val adapter = recyclerView.adapter as ListAdapter
-                adapter.removeAt(viewHolder.adapterPosition)
+                val adapterRv = recyclerView.adapter as ListAdapter
+                adapterRv.removeAt(viewHolder.adapterPosition)
             }
         }
 

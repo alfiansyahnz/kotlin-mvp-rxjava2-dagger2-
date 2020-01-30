@@ -81,7 +81,7 @@ class AboutFragment : Fragment(), AboutContract.View {
     }
 
     companion object {
-        val TAG: String = "AboutFragment"
+        const val TAG: String = "AboutFragment"
     }
 
 
