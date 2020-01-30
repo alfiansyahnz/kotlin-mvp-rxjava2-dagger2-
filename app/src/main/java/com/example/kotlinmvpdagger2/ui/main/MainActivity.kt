@@ -1,11 +1,13 @@
 package com.example.kotlinmvpdagger2.ui.main
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kotlinmvpdagger2.R
 import com.example.kotlinmvpdagger2.di.component.DaggerActivityComponent
 import com.example.kotlinmvpdagger2.di.module.ActivityModule
 import com.example.kotlinmvpdagger2.ui.about.AboutFragment
+import com.example.kotlinmvpdagger2.ui.list.ListFragment
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainContract.View {
@@ -22,6 +24,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun onResume() {
         super.onResume()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu)
+        return true
 
     }
 
@@ -29,6 +36,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         if (supportFragmentManager.findFragmentByTag(AboutFragment.TAG) == null) {
             supportFragmentManager.beginTransaction()
                 .addToBackStack(null)
+                .setCustomAnimations(AnimType.FADE.getAnimPair().first , AnimType.FADE.getAnimPair().second)
                 .replace(R.id.frameLayout, AboutFragment().newInstance(), AboutFragment.TAG)
                 .commit()
         } else {
@@ -38,7 +46,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun showListFragment() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        supportFragmentManager.beginTransaction()
+            .disallowAddToBackStack()
+            .setCustomAnimations(AnimType.SLIDE.getAnimPair().first ,AnimType.SLIDE.getAnimPair().second)
+            .replace(R.id.frameLayout , ListFragment().newInstance() , ListFragment.TAG)
+            .commit()
     }
 
     private fun injectDependency() {
@@ -60,19 +72,19 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             supportFragmentManager.popBackStack()
         }
     }
-//
-//    enum class AnimType() {
-//        SLIDE,
-//        FADE;
-//
-//        fun getAnimPair(): Pair<Int, Int> {
-//            when(this) {
-//                SLIDE -> return Pair(R.anim.slide_left, R.anim.slide_right)
-//                FADE -> return Pair(R.anim.fade_in, R.anim.fade_out)
-//            }
-//
-//            return Pair(R.anim.slide_left, R.anim.slide_right)
-//        }
-//    }
+
+    enum class AnimType() {
+        SLIDE,
+        FADE;
+
+        fun getAnimPair(): Pair<Int, Int> {
+            when(this) {
+                SLIDE -> return Pair(R.anim.slide_left, R.anim.slide_right)
+                FADE -> return Pair(R.anim.fade_in, R.anim.fade_out)
+            }
+
+            return Pair(R.anim.slide_left, R.anim.slide_right)
+        }
+    }
 
 }
