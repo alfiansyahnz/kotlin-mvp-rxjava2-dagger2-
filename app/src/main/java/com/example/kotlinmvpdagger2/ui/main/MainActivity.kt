@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 .replace(R.id.frameLayout, AboutFragment().newInstance(), AboutFragment.TAG)
                 .commit()
         } else {
-
+            //
         }
 
     }
