@@ -15,10 +15,10 @@ class ListAdapter(private val context: Context, private val list: MutableList<Po
                   fragment: Fragment
 ): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
-    private val listener: ListAdapter.onItemClickListener
+    private val listener: onItemClickListener
 
     init {
-        this.listener = fragment as ListAdapter.onItemClickListener
+        this.listener = fragment as onItemClickListener
     }
 
 
@@ -30,17 +30,17 @@ class ListAdapter(private val context: Context, private val list: MutableList<Po
         val post = list[position]
 
         // holder!!.bind(post)
-        holder!!.title!!.setText(post.tittle)
-        holder.body!!.setText(post.body)
+        holder.title!!.text = post.tittle
+        holder.body!!.text = post.body
 
         holder.layout!!.setOnClickListener {
-            listener.itemDetail(post.id.toString()!!)
+            listener.itemDetail(post.id.toString())
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.item_layout, parent, false)
-        return ListAdapter.ListViewHolder(itemView)
+        return ListViewHolder(itemView)
     }
 
     fun removeAt(position: Int) {

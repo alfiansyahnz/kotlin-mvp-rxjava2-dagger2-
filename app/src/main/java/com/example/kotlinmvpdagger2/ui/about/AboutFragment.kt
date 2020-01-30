@@ -28,7 +28,7 @@ class AboutFragment : Fragment(), AboutContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        injectDepedency()
+        injectDependency()
     }
 
     override fun onCreateView(
@@ -68,7 +68,7 @@ class AboutFragment : Fragment(), AboutContract.View {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private fun injectDepedency() {
+    private fun injectDependency() {
         val aboutFragment = DaggerFragmentComponent.builder()
             .fragmentModule(FragmentModule())
             .build()
