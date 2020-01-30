@@ -11,7 +11,6 @@ class AboutPresenter : AboutContract.Presenter {
 
     private lateinit var view: AboutContract.View
 
-    @SuppressLint("CheckResult")
     override fun loadMessage() {
         Observable.just(true).delay(1000, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.io())
@@ -23,11 +22,10 @@ class AboutPresenter : AboutContract.Presenter {
     }
 
     override fun subscribe() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun unsubscribe() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun attach(view: AboutContract.View) {

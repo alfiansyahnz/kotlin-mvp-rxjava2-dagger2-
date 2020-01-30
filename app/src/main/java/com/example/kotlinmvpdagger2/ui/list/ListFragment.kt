@@ -19,9 +19,6 @@ import com.example.kotlinmvpdagger2.util.SwipeToDelete
 import kotlinx.android.synthetic.main.fragment_list2.*
 import javax.inject.Inject
 
-/**
- * A simple [Fragment] subclass.
- */
 class ListFragment : Fragment(), ListContract.View, ListAdapter.onItemClickListener {
 
     @Inject
@@ -92,12 +89,12 @@ class ListFragment : Fragment(), ListContract.View, ListAdapter.onItemClickListe
     }
 
     override fun itemRemoveClick(post: Post) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
 
     override fun itemDetail(postId: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     private fun injectDependency() {
@@ -113,6 +110,6 @@ class ListFragment : Fragment(), ListContract.View, ListAdapter.onItemClickListe
     }
 
     companion object {
-        val TAG: String = "ListFragment"
+        const val TAG: String = "ListFragment"
     }
 }

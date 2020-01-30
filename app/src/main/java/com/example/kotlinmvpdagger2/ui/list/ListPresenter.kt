@@ -60,7 +60,7 @@ class ListPresenter : ListContract.Presenter {
     }
 
     override fun subscribe() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun unsubscribe() {
@@ -77,9 +77,9 @@ class ListPresenter : ListContract.Presenter {
         albums: List<Album>
     ): DetailViewModel {
 
-        val postslist = posts.take(30)
-        val userslist = users.take(30)
-        val albumslist = albums.take(30)
+        posts.take(30)
+        users.take(30)
+        albums.take(30)
         return DetailViewModel(posts, users, albums)
 
     }
