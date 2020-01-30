@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 return true
             }
             else -> {
-
             }
         }
         return super.onOptionsItemSelected(item)
